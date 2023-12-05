@@ -9,17 +9,19 @@
     <title>Quizz app</title>
   </head>
   <body>
-    <div class="rubrik-container">
-      <h1>Ankademin quizz</h1>
-    </div>
-    <div class="kort">
-      <div class="rubrik-kort">
-        <h2>Fråga 1</h2>
+    <h1>Ankademin quizz</h1>
+    <div class="kort hide">
+      <h2 id="question">Frågan hamnar här</h2>
+      <div id="answer-buttons">
+        <button class="btn">Svar 1</button>
+        <button class="btn">Svar 2</button>
+        <button class="btn">Svar 3</button>
+        <button class="btn">Svar 4</button>
       </div>
-      <button class="btn"></button>
-      <button class="btn"></button>
-      <button class="btn"></button>
-      <button class="btn"></button>
+    </div>
+    <div class="controls">
+      <button id="next-btn" class="hide">Nästa</button>
+      <button id="start-btn" class="start-btn btn">Start</button>
     </div>
   </body>
 </html>

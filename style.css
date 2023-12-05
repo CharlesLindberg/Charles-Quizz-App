@@ -1,20 +1,80 @@
-.rubrik-container {
-  border: 1px solid black;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+body {
+  background-color: rgb(42, 42, 93);
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  margin: 30px;
+  align-items: center;
+}
+h1 {
+  display: block;
 }
 
-.rubrik-kort {
-  border: 1px solid black;
+.body-correct {
+  background-color: green;
+}
+
+.body-wrong {
+  background-color: crimson;
 }
 
 .kort {
-  border: 1px solid black;
-  margin: 30px;
-  min-height: 50vh;
+  border: 2px solid beige;
+  border-radius: 10px;
+  width: 800px;
+  max-width: 80%;
+  padding: 10px;
+  box-shadow: 0 0 6px 2px;
+  background-color: rgb(253, 248, 241);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+}
+
+.hide {
+  display: none;
+}
+
+#answer-buttons {
+  border: 1px solid black;
+  width: 100%;
+  min-height: 200px;
+  align-items: centers;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  width: 90%;
+  height: 30px;
+  align-items: center;
+  margin: 10px;
+  display: block;
+}
+
+#next-btn {
+  width: 60%;
+  height: 50px;
+  margin: 30px;
+}
+
+#start-btn {
+  width: 60%;
+  height: 50px;
+}
+
+.controls {
+  border: 1px solid white;
+  border-radius: 10px;
+  width: 800px;
+  max-width: 80%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
