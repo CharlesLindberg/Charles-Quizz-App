@@ -10,7 +10,7 @@ const questionContainerElement = document.querySelector(".kort");
 const answerButtonsElement = document.getElementById("answer-buttons");
 let currentQuestionIndex;
 
-// Start game function ----------------------------------
+// Start game function ---------------------------------->>>>>>>>>>>>>>>>><
 
 function startGame() {
   console.log("Started");
@@ -20,6 +20,8 @@ function startGame() {
 
   setNextQuestion();
 }
+
+// Setnextquestion-funktion -------------------------->>>>>>>>>>>
 
 function setNextQuestion() {
   resetState();
@@ -50,9 +52,14 @@ function showQuestion(question) {
 function selectAnswer(answer) {
   const correct = answer.correct;
   setStatusClass(document.body, correct);
+
   Array.from(answerButtonsElement.children).forEach((button) => {
-    setStatusClass(button, button.innerText == answer.text);
+    if (button.innerText === answer.text) {
+      const parentDiv = button.parentElement;
+      setStatusClass(parentDiv, correct);
+    }
   });
+
   if (questions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove("hide");
   } else {
@@ -60,6 +67,20 @@ function selectAnswer(answer) {
     startButton.classList.remove("hide");
   }
 }
+
+// function selectAnswer(answer) {
+//   const correct = answer.correct;
+//   setStatusClass(document.body, correct);
+//   Array.from(answerButtonsElement.children).forEach((button) => {
+//     setStatusClass(button, button.innerText == answer.text);
+//   });
+//   if (questions.length > currentQuestionIndex + 1) {
+//     nextButton.classList.remove("hide");
+//   } else {
+//     startButton.innerText = "Börja om";
+//     startButton.classList.remove("hide");
+//   }
+// }
 
 function setStatusClass(element, correct) {
   clearStatusClass(element);
@@ -70,12 +91,21 @@ function setStatusClass(element, correct) {
   }
 }
 
+// function setStatusClass(element, correct) {
+//   clearStatusClass(element);
+//   if (correct) {
+//     element.classList.add("correct");
+//   } else {
+//     element.classList.add("wrong");
+//   }
+// }
+
 function clearStatusClass(element) {
   element.classList.remove("correct");
   element.classList.remove("wrong");
 }
 
-// Frågor array -----------------------------------------
+// Frågor array ----------------------------------------->>>>>>>>>>>>>>>>>>>
 
 const questions = [
   {
