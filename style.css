@@ -78,3 +78,11 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+.correct {
+  background-color: green;
+}
+
+.wrong {
+  background-color: crimson;
+}
