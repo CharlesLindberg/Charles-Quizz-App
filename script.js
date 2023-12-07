@@ -17,6 +17,7 @@ function startGame() {
   startButton.classList.add("hide");
   currentQuestionIndex = 0;
   questionContainerElement.classList.remove("hide");
+  nextButton.classList.remove("hide");
 
   setNextQuestion();
 }
