@@ -1,9 +1,9 @@
 /* 
 - Skapa en quizzapp med 10 frågor
-- 4 svar på varje fråga 
+- Sant/falskt frågor, multiple choise frågor (fyra svarsalternativ varav ett rätt), checkbox-svar (4 svarsalternativ varav flera är rätt)
 - Någonting som håller koll på poängen. En räknare 
 - Mellan vajre fråga så måste fältet med frågor tömmas 
-- Så att olika typer av frågor ska kunna finnas (knappar, checkboxar och radiobuttons). 
+- Användaren ska kunna se efter vilka frågor hen svarat rätt eller fel på
 - Skapa if-else statement. Om questions.type == "checkbox", skapa checkboxar, else if skapa knappar, radiobuttons osv
 . */
 
@@ -13,27 +13,47 @@ const startButton = document.getElementById("start-btn");
 startButton.addEventListener("click", startGame);
 const questionContainerElement = document.querySelector(".kort");
 const answerButtons = document.getElementById("answer-buttons");
-let currentQuestionIndex;
+let currentQuestionIndex = 0;
 const nextButton = document.getElementById("next-btn");
 
 nextButton.addEventListener("click", () => {
   //   let svar = document.querySelector("[name='radio']:checked").value;
-
+  console.log(questions.length);
+  if (currentQuestionIndex === questions.length - 1) return alert("Klart!");
+  const currentQuestionAnswer = {
+    question: "",
+    answers: [],
+  };
   // lista ut om det är en radiobutton eller checkbox
 
   console.log(questions);
+  // Istället för att kolla alla frågor (jag vill inte göra en forof loop här tydligen)
+  // Kolla bara den fråga som visas just nu.
+  //   for (const question of questions) {
+  //     console.log(question);
 
-  if (question.type === "radio") //Denna if-sats är fel {
-    userAnswers.push(document.querySelector("[type='radio']:checked").value);
-    currentQuestionIndex++;
-    console.log(userAnswers);
-    setNextQuestion();
-  } else if (question.type === "checkbox") {
-    userAnswers.push(document.querySelector("[type='checkbox']:checked").value);
-    currentQuestionIndex++;
-    console.log(userAnswers);
-    setNextQuestion();
+  currentQuestionAnswer.question = questions[currentQuestionIndex].question;
+
+  if (questions[currentQuestionIndex].type === "radio") {
+    console.log(
+      currentQuestionIndex,
+      document.querySelector("[type='radio']").value
+    );
+
+    currentQuestionAnswer.answers = [
+      document.querySelector("[type='radio']:checked").value,
+    ];
+
+    //   setNextQuestion();
+  } else if (questions[currentQuestionIndex].type === "checkbox") {
+    currentQuestionAnswer.answer = Array.from(
+      document.querySelectorAll("[type='checkbox']:checked")
+    ).map((checkbox) => checkbox.value);
   }
+  userAnswers.push(currentQuestionAnswer);
+  currentQuestionIndex++;
+  setNextQuestion();
+  console.log(userAnswers);
 });
 
 let userAnswers = [];
@@ -103,9 +123,9 @@ function showQuestion(question) {
   }
 }
 
-function selectAnswer(answer) {
-  const correct = answer.correct;
-}
+// function selectAnswer(answer) {
+//   const correct = answer.correct;
+// }
 
 /* -------- ----  QUESTIONS ARRAY ----- -------------- */
 
@@ -123,7 +143,7 @@ const questions = [
 
   {
     question: "Ankademin är bäst",
-    type: "trueFalse",
+    type: "radio",
     answers: [
       { text: "Sant", correct: true },
       { text: "Falskt", correct: false },
