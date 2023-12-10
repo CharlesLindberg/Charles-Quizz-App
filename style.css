@@ -7,8 +7,34 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+footer {
+  border: 1px solid white;
+  width: 100%;
+  margin-top: 250px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 h1 {
   display: block;
+  font-family: sniglet;
+  font-size: 3rem;
+  color: lightyellow;
+}
+
+h2 {
+  font-family: afacad;
+  font-weight: 100;
+}
+
+label {
+  font-family: afacad;
+  font-weight: 200;
+  font-size: 20px;
 }
 
 .body-correct {
@@ -26,7 +52,7 @@ h1 {
   max-width: 80%;
   padding: 10px;
   box-shadow: 0 0 6px 2px;
-  background-color: rgb(253, 248, 241);
+  background-color: lightyellow;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,15 +82,72 @@ h1 {
   display: block;
 }
 
-#next-btn {
-  width: 60%;
-  height: 50px;
-  margin: 30px;
+#start-btn {
+  height: 60px;
+  width: 200px;
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+    rgba(44, 187, 99, 0.15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: sniglet;
+  font-weight: 800;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-#start-btn {
-  width: 60%;
+#start-btn:hover {
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-3deg);
+}
+
+#next-btn {
+  width: 30%;
   height: 50px;
+  margin: 30px;
+  font-family: sniglet;
+  font-weight: 800;
+  box-shadow: rgba(187, 44, 187, 0.2) 0 -25px 18px -14px inset,
+    rgba(187, 44, 185, 0.15) 0 1px 2px, rgba(180, 44, 187, 0.15) 0 2px 4px,
+    rgba(187, 44, 187, 0.15) 0 4px 8px, rgba(163, 44, 187, 0.15) 0 8px 16px,
+    rgba(187, 44, 168, 0.15) 0 16px 32px;
+  color: purple;
+  background-color: rgb(251, 148, 232);
+  box-shadow: rgb(247, 195, 235);
+  border: 0;
+  border-radius: 100px;
+}
+
+#next-btn:hover {
+  transform: scale(1.05) rotate(-1deg);
+  transition: 0.2s;
+  box-shadow: rgba(152, 58, 122, 0.452) 0 -25px 18px -14px inset,
+    rgba(161, 44, 187, 0.25) 0 1px 2px, rgba(163, 44, 187, 0.25) 0 2px 4px,
+    rgba(142, 44, 187, 0.25) 0 4px 8px, rgba(151, 44, 187, 0.25) 0 8px 16px,
+    rgba(175, 44, 187, 0.25) 0 16px 32px;
+}
+
+input[type="checkbox"] {
+  border: 8px solid purple;
+  background-color: red;
+}
+
+input[type="radio"] {
+  background: crimson;
 }
 
 .controls {

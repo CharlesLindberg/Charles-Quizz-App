@@ -137,3 +137,10 @@ const questions = [
     ],
   },
 ];
+
+/* -------------- DARK MODE ----------------- */
+
+const darkMode = document.getElementById("dark-mode");
+darkMode.addEventListener("click", changeDarkness);
+
+function changeDarkness() {}

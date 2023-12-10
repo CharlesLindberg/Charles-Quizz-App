@@ -18,6 +18,25 @@ const nextButton = document.getElementById("next-btn");
 
 // --------------- NEXT BUTTON funktionalitet ----------------------
 
+/* 
+
+1. När användaren klickar på "Nästa", kolla om nuvarande frågan är samma som frågoarrayens längd. Om det stämmer, avsluta spelet. 
+
+2. Variablen currentQuestionAnswer sparar användarens svar. 
+
+3. OM nuvarande frågan har en type radio: spara värdet av den checkade radiobutton i currentQuestionAnswer.answer
+
+4. Annars, om currentQuestionIndex är type checkbox: Gör om det sparade värdet till en array och spara det checkade värdet
+
+   Istället för att kolla alla frågor (jag vill inte göra en forof loop här tydligen)
+   Kolla bara den fråga som visas just nu.
+     for (const question of questions) {
+       console.log(question);
+  lista ut om det är en radiobutton eller checkbox
+
+
+*/
+
 nextButton.addEventListener("click", () => {
   console.log(questions.length);
   if (currentQuestionIndex === questions.length - 1) return alert("Klart!");
@@ -25,13 +44,8 @@ nextButton.addEventListener("click", () => {
     question: "",
     answers: [],
   };
-  // lista ut om det är en radiobutton eller checkbox
 
   console.log(questions);
-  // Istället för att kolla alla frågor (jag vill inte göra en forof loop här tydligen)
-  // Kolla bara den fråga som visas just nu.
-  //   for (const question of questions) {
-  //     console.log(question);
 
   currentQuestionAnswer.question = questions[currentQuestionIndex].question;
 
@@ -69,7 +83,6 @@ function startGame() {
 }
 
 /* ------------------- VISA NÄSTA FRÅGA ------------------- */
-
 /*   nextButton ska göra två saker.
 
 1. Registrera vilket värde användaren valt och spara det i userAnswers.
@@ -164,6 +177,16 @@ const questions = [
     type: "radio",
     answers: [
       { text: "Massör", correct: false },
+      { text: "Hudvårdsspecialist", correct: false },
+      { text: "Makeupartist", correct: false },
+      { text: "Frontend utvecklare", correct: true },
+    ],
+  },
+  {
+    question: "bajs bajs bajs?",
+    type: "radio",
+    answers: [
+      { text: "Massör (skalp)", correct: false },
       { text: "Hudvårdsspecialist", correct: false },
       { text: "Makeupartist", correct: false },
       { text: "Frontend utvecklare", correct: true },
