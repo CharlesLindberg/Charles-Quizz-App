@@ -16,8 +16,9 @@ const answerButtons = document.getElementById("answer-buttons");
 let currentQuestionIndex = 0;
 const nextButton = document.getElementById("next-btn");
 
+// --------------- NEXT BUTTON funktionalitet ----------------------
+
 nextButton.addEventListener("click", () => {
-  //   let svar = document.querySelector("[name='radio']:checked").value;
   console.log(questions.length);
   if (currentQuestionIndex === questions.length - 1) return alert("Klart!");
   const currentQuestionAnswer = {
@@ -43,8 +44,6 @@ nextButton.addEventListener("click", () => {
     currentQuestionAnswer.answers = [
       document.querySelector("[type='radio']:checked").value,
     ];
-
-    //   setNextQuestion();
   } else if (questions[currentQuestionIndex].type === "checkbox") {
     currentQuestionAnswer.answer = Array.from(
       document.querySelectorAll("[type='checkbox']:checked")
