@@ -15,7 +15,8 @@ const questionContainerElement = document.querySelector(".kort");
 const answerButtons = document.getElementById("answer-buttons");
 let currentQuestionIndex = 0;
 const nextButton = document.getElementById("next-btn");
-
+let correctAnswerCounter = 0;
+let userAnswers = [];
 // --------------- NEXT BUTTON funktionalitet ----------------------
 
 /* 
@@ -63,13 +64,33 @@ nextButton.addEventListener("click", () => {
       document.querySelectorAll("[type='checkbox']:checked")
     ).map((checkbox) => checkbox.value);
   }
+
   userAnswers.push(currentQuestionAnswer);
   currentQuestionIndex++;
+  countPoints();
   setNextQuestion();
-  console.log(userAnswers);
+  console.log(userAnswers, "Användarsvar");
+  //   if (questions.answers.correct === true) {
+  //     console.log("Its working??");
+  //   }
 });
 
-let userAnswers = [];
+function countPoints() {
+  for (let i = 0; i < userAnswers.length; i++) {
+    let correct = userAnswers[i];
+    console.log(correct.answers);
+    for (let j = 0; j < correct.answers.length; j++) {
+      let realCorrect = correct.answers[j];
+      console.log(realCorrect, "HÄRÄRÄRÄR");
+      if (realCorrect == "true") {
+        correctAnswerCounter++;
+        console.log(correctAnswerCounter, "LKSDKSDKJSDLKS");
+      }
+    }
+  }
+}
+
+function hanteraSvar() {}
 
 /* --------------- STARTA SPELET -------------------- */
 
