@@ -76,7 +76,7 @@ label {
   display: none;
 }
 
-#answer-buttons {
+.answer-buttons {
   border: 1px solid black;
   width: 100%;
   min-height: 200px;
@@ -191,4 +191,20 @@ input[type="radio"] {
 
 .wrong {
   background-color: crimson;
+}
+
+.underkand {
+  color: crimson;
+}
+
+.bra {
+  color: orange;
+}
+
+.riktigtBra {
+  color: green;
+}
+
+#hide {
+  display: none;
 }

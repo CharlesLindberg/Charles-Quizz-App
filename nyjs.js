@@ -12,12 +12,13 @@
 const startButton = document.getElementById("start-btn");
 startButton.addEventListener("click", startGame);
 const questionContainerElement = document.querySelector(".kort");
-const answerButtons = document.getElementById("answer-buttons");
+const answerButtons = document.querySelector(".answer-buttons");
 let currentQuestionIndex = 0;
 const nextButton = document.getElementById("next-btn");
 let correctAnswerCounter = 0;
 let userAnswers = [];
 const sum = (array) => array.reduce((sum, acc) => sum + acc, 0);
+const resultatDiv = document.querySelector(".resultDiv");
 
 // --------------- NEXT BUTTON funktionalitet ----------------------
 
@@ -65,7 +66,7 @@ nextButton.addEventListener("click", () => {
     ).map((checkbox) => parseInt(checkbox.value));
     const nrOfCorrectAnswersArray = questions[currentQuestionIndex].answers.map(
       (answer) => {
-        answer.correct;
+        return answer.correct;
       }
     );
     const multiAnswerValue = sum(multiAnswerValueArray);
@@ -93,9 +94,11 @@ nextButton.addEventListener("click", () => {
       correctAnswerCounter += answer;
     });
     console.log({ correctAnswerCounter });
-    return alert(
-      `Du fick ${correctAnswerCounter} av ${questions.length} poäng`
-    );
+
+    return showResult();
+    // return alert(
+    //   `Du fick ${correctAnswerCounter} av ${questions.length} poäng`
+    // );
   }
 
   //   countPoints();
@@ -105,6 +108,35 @@ nextButton.addEventListener("click", () => {
 });
 
 /* -------------- Visa resultatet ------------------- */
+
+function showResult() {
+  const resultatRubrik = document.createElement("h2");
+  resultatRubrik.innerHTML = `Du fick ${correctAnswerCounter} av ${questions.length} poäng`;
+  resultatDiv.appendChild(resultatRubrik);
+  let p = document.createElement("p");
+  //   answerButtons.innerHTML = "";
+  //   questionContainerElement.innerHTML = "KLAR! 🎉";
+
+  if (correctAnswerCounter < 5) {
+    p.innerHTML = "Du fick underkänt";
+    p.classList.add("underkand");
+    resultatDiv.append(p);
+  } else if (correctAnswerCounter >= 5 && correctAnswerCounter < 7.5) {
+    p.innerHTML = "Du fick godkänt";
+    p.classList.add("bra");
+    resultatDiv.append(p);
+  } else {
+    p.innerHTML = "Du fick MVG!!";
+    p.classList.add("riktigtBra");
+    resultatDiv.append(p);
+  }
+  startOver();
+}
+
+function startOver() {
+  answerButtons.innerHTML = "KLAR 🎉";
+  resultatDiv.classList.remove("hide");
+}
 
 // function resultat() {
 //   if (`${correctAnswerCounter} > (${questions.length} / 2) `) {
