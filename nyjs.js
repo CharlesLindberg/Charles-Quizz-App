@@ -55,17 +55,17 @@ nextButton.addEventListener("click", () => {
       "Är detta en Radiobutton?"
     );
 
-    const answerValue = document.querySelector("[type='radio']:checked").value;
-    currentQuestionAnswer.answer = parseInt(answerValue);
+    const answerValue = document.querySelector("[type='radio']:checked").value; // Hämtar det checkade radio button-värdet
+    currentQuestionAnswer.answer = parseInt(answerValue); // Gör om värdet till ett nummer (1 eller 0)
 
-    // Om det är en radiobutton: Spara det checkade värdet
+    // Om den nuvarande frågan är en checkbox-fråga. Gör om svaret från en nod.lista till en array med Array.from(). Gör om svaren till nummer och lagra resultatet i variablen nrOfCorrectAnswers. Jämför sedan nrOfCorrectAnswers med användarens svar (multiAnswerValue). OM dom är samma, ge currentQuestionAnswer.answer 1 och pusha upp det i
   } else if (questions[currentQuestionIndex].type === "checkbox") {
     const multiAnswerValueArray = Array.from(
       document.querySelectorAll("[type='checkbox']:checked")
     ).map((checkbox) => parseInt(checkbox.value));
     const nrOfCorrectAnswersArray = questions[currentQuestionIndex].answers.map(
       (answer) => {
-        return answer.correct;
+        answer.correct;
       }
     );
     const multiAnswerValue = sum(multiAnswerValueArray);
@@ -88,6 +88,7 @@ nextButton.addEventListener("click", () => {
   userAnswers.push(currentQuestionAnswer);
   currentQuestionIndex++;
   if (currentQuestionIndex === questions.length) {
+    // kör funktion här?
     userAnswers.map(({ answer }) => {
       correctAnswerCounter += answer;
     });
@@ -102,6 +103,16 @@ nextButton.addEventListener("click", () => {
   console.log(userAnswers, "userAnswers");
   console.log(currentQuestionAnswer);
 });
+
+/* -------------- Visa resultatet ------------------- */
+
+// function resultat() {
+//   if (`${correctAnswerCounter} > (${questions.length} / 2) `) {
+//     return `Du fick godkänt! ${correctAnswerCounter} av ${questions.length} poäng`;
+//   } else if ((${correctAnswerCounter} - 10) < 3 ) {
+//     return `Du fick MVG, ${correctAnswerCounter} av ${questions.length} poäng`
+//   }
+// }
 
 // Göra en funktion som skriver   `Du fick ${correctAnswerCounter} av ${questions.length} poäng` - använd correctAnswerCounter och questions.length som parametrar
 
@@ -263,3 +274,5 @@ function darkMode() {
     document.querySelector(".dark-mode-toggle").classList.remove("light");
   }
 }
+
+/* ------------------- VISA RESULTATET ---------------- */
