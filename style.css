@@ -8,10 +8,23 @@ body {
   align-items: center;
 }
 
+body.light {
+  background: lightblue;
+}
+
+h1.light {
+  color: rgb(55, 30, 30);
+}
+
+#dark-mode.light {
+  background: #5b614b;
+  color: rgb(41, 41, 41);
+}
+
 footer {
   border: 1px solid white;
   width: 100%;
-  margin-top: 250px;
+  margin-top: 100px;
   bottom: 0px;
   display: flex;
   flex-direction: row;
@@ -139,6 +152,16 @@ label {
     rgba(161, 44, 187, 0.25) 0 1px 2px, rgba(163, 44, 187, 0.25) 0 2px 4px,
     rgba(142, 44, 187, 0.25) 0 4px 8px, rgba(151, 44, 187, 0.25) 0 8px 16px,
     rgba(175, 44, 187, 0.25) 0 16px 32px;
+}
+
+#dark-mode {
+  border-radius: 100px;
+  height: 50px;
+  width: 160px;
+  font-family: knewave;
+  font-size: 25px;
+  background-color: rgb(41, 41, 41);
+  color: #edfbc2;
 }
 
 input[type="checkbox"] {

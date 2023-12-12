@@ -17,6 +17,8 @@ let currentQuestionIndex = 0;
 const nextButton = document.getElementById("next-btn");
 let correctAnswerCounter = 0;
 let userAnswers = [];
+const sum = (array) => array.reduce((sum, acc) => sum + acc, 0);
+
 // --------------- NEXT BUTTON funktionalitet ----------------------
 
 /* 
@@ -39,58 +41,86 @@ let userAnswers = [];
 */
 
 nextButton.addEventListener("click", () => {
-  console.log(questions.length);
-  if (currentQuestionIndex === questions.length - 1) return alert("Klart!");
   const currentQuestionAnswer = {
     question: "",
-    answers: [],
+    answer: "",
   };
-
-  console.log(questions);
 
   currentQuestionAnswer.question = questions[currentQuestionIndex].question;
 
   if (questions[currentQuestionIndex].type === "radio") {
     console.log(
       currentQuestionIndex,
-      document.querySelector("[type='radio']").value
+      document.querySelector("[type='radio']").value,
+      "Är detta en Radiobutton?"
     );
 
-    currentQuestionAnswer.answers = [
-      document.querySelector("[type='radio']:checked").value,
-    ];
+    const answerValue = document.querySelector("[type='radio']:checked").value;
+    currentQuestionAnswer.answer = parseInt(answerValue);
+
+    // Om det är en radiobutton: Spara det checkade värdet
   } else if (questions[currentQuestionIndex].type === "checkbox") {
-    currentQuestionAnswer.answer = Array.from(
+    const multiAnswerValueArray = Array.from(
       document.querySelectorAll("[type='checkbox']:checked")
-    ).map((checkbox) => checkbox.value);
+    ).map((checkbox) => parseInt(checkbox.value));
+    const nrOfCorrectAnswersArray = questions[currentQuestionIndex].answers.map(
+      (answer) => {
+        return answer.correct;
+      }
+    );
+    const multiAnswerValue = sum(multiAnswerValueArray);
+    const nrOfCorrectAnswers = sum(nrOfCorrectAnswersArray);
+
+    if (multiAnswerValue === nrOfCorrectAnswers) {
+      currentQuestionAnswer.answer = 1;
+    } else {
+      currentQuestionAnswer.answer = 0;
+    }
+
+    console.log({
+      nrOfCorrectAnswers,
+    });
+    console.log({
+      multiAnswerValue,
+    });
   }
 
   userAnswers.push(currentQuestionAnswer);
   currentQuestionIndex++;
-  countPoints();
+  if (currentQuestionIndex === questions.length) {
+    userAnswers.map(({ answer }) => {
+      correctAnswerCounter += answer;
+    });
+    console.log({ correctAnswerCounter });
+    return alert(
+      `Du fick ${correctAnswerCounter} av ${questions.length} poäng`
+    );
+  }
+
+  //   countPoints();
   setNextQuestion();
-  console.log(userAnswers, "Användarsvar");
-  //   if (questions.answers.correct === true) {
-  //     console.log("Its working??");
-  //   }
+  console.log(userAnswers, "userAnswers");
+  console.log(currentQuestionAnswer);
 });
 
-function countPoints() {
-  for (let i = 0; i < userAnswers.length; i++) {
-    let correct = userAnswers[i];
-    console.log(correct.answers);
-    for (let j = 0; j < correct.answers.length; j++) {
-      let realCorrect = correct.answers[j];
-      console.log(realCorrect, "HÄRÄRÄRÄR");
-      if (realCorrect == "true") {
-        correctAnswerCounter++;
-        console.log(correctAnswerCounter, "LKSDKSDKJSDLKS");
-      }
-    }
-  }
-}
+// Göra en funktion som skriver   `Du fick ${correctAnswerCounter} av ${questions.length} poäng` - använd correctAnswerCounter och questions.length som parametrar
 
-function hanteraSvar() {}
+/* ------------------ RÄKNA POÄNG ------------------ */
+
+// function countPoints() {
+//   for (let i = 0; i < userAnswers.length; i++) {
+//     let correct = userAnswers[i];
+//     console.log(correct.answers, "Svarade jag rätt?");
+//     for (let j = 0; j < correct.answers.length; j++) {
+//       let realCorrect = correct.answers[j];
+//       console.log(realCorrect, "realCorrect :O");
+//       if (realCorrect == "true") {
+//         correctAnswerCounter++;
+//         console.log(correctAnswerCounter, "Poängräknare..");
+//       }
+//     }
+//   }
+// }
 
 /* --------------- STARTA SPELET -------------------- */
 
@@ -156,21 +186,17 @@ function showQuestion(question) {
   }
 }
 
-// function selectAnswer(answer) {
-//   const correct = answer.correct;
-// }
-
-/* -------- ----  QUESTIONS ARRAY ----- -------------- */
+/* ---------------------  QUESTIONS ARRAY -------------------- */
 
 const questions = [
   {
     question: "Vilket år grundades Ankademin?",
     type: "radio",
     answers: [
-      { text: "År 1929", correct: false },
-      { text: "År 1994", correct: true },
-      { text: "År 1849", correct: false },
-      { text: "År 1999", correct: false },
+      { text: "År 1929", correct: 0 },
+      { text: "År 1994", correct: 1 },
+      { text: "År 1849", correct: 0 },
+      { text: "År 1999", correct: 0 },
     ],
   },
 
@@ -178,8 +204,8 @@ const questions = [
     question: "Ankademin är bäst",
     type: "radio",
     answers: [
-      { text: "Sant", correct: true },
-      { text: "Falskt", correct: false },
+      { text: "Sant", correct: 1 },
+      { text: "Falskt", correct: 0 },
     ],
   },
 
@@ -187,30 +213,53 @@ const questions = [
     question: "Vilka personer jobbar INTE på Ankademin",
     type: "checkbox",
     answers: [
-      { text: "Brandon Duarte Tsegai", correct: false },
-      { text: "Brandon Ingram", correct: true },
-      { text: "Brandon Knight", correct: true },
-      { text: "Marlon Brando", correct: true },
+      { text: "Brandon Duarte Tsegai", correct: 0 },
+      { text: "Brandon Ingram", correct: 1 },
+      { text: "Brandon Knight", correct: 1 },
+      { text: "Marlon Brando", correct: 1 },
     ],
   },
   {
     question: "Wilhelm studerar på Ankademin, vad studerar Wilhelm till?",
     type: "radio",
     answers: [
-      { text: "Massör", correct: false },
-      { text: "Hudvårdsspecialist", correct: false },
-      { text: "Makeupartist", correct: false },
-      { text: "Frontend utvecklare", correct: true },
+      { text: "Massör", correct: 0 },
+      { text: "Hudvårdsspecialist", correct: 0 },
+      { text: "Makeupartist", correct: 0 },
+      { text: "Frontend utvecklare", correct: 1 },
     ],
   },
   {
     question: "bajs bajs bajs?",
     type: "radio",
     answers: [
-      { text: "Massör (skalp)", correct: false },
-      { text: "Hudvårdsspecialist", correct: false },
-      { text: "Makeupartist", correct: false },
-      { text: "Frontend utvecklare", correct: true },
+      { text: "Massör (skalp)", correct: 0 },
+      { text: "Hudvårdsspecialist", correct: 0 },
+      { text: "Makeupartist", correct: 0 },
+      { text: "Frontend utvecklare", correct: 1 },
     ],
   },
 ];
+
+/* ----------------- DARK MODE ---------------------- */
+
+// document.getElementById("dark-mode").addEventListener("click", () => {
+//   document.body.classList.toggle("light");
+//   document.querySelector("h1").classList.toggle("light");
+//   document.getElementById("dark-mode").innerHTML = "Dark mode";
+// });
+
+function darkMode() {
+  let x = document.getElementById("dark-mode");
+  if (x.innerHTML === "Light mode") {
+    x.innerHTML = "Dark mode";
+    document.querySelector("h1").classList.add("light");
+    document.body.classList.add("light");
+    document.querySelector(".dark-mode-toggle").classList.add("light");
+  } else {
+    document.body.classList.remove("light");
+    document.querySelector("h1").classList.remove("light");
+    x.innerHTML = "Light mode";
+    document.querySelector(".dark-mode-toggle").classList.remove("light");
+  }
+}
