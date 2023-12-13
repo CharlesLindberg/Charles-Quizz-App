@@ -113,23 +113,37 @@ function showResult() {
   const resultatRubrik = document.createElement("h2");
   resultatRubrik.innerHTML = `Du fick ${correctAnswerCounter} av ${questions.length} poäng`;
   questionContainerElement.appendChild(resultatRubrik);
-  let p = document.createElement("p");
+  let h2 = document.createElement("h2");
   //   answerButtons.innerHTML = "";
   //   questionContainerElement.innerHTML = "KLAR! 🎉";
 
   if (correctAnswerCounter < 5) {
-    p.innerHTML = "Du fick underkänt";
-    p.classList.add("underkand");
-    questionContainerElement.append(p);
+    h2.innerHTML = "Du fick underkänt";
+    h2.classList.add("underkand");
+    questionContainerElement.append(h2);
   } else if (correctAnswerCounter >= 5 && correctAnswerCounter < 7.5) {
-    p.innerHTML = "Du fick godkänt";
-    p.classList.add("bra");
-    questionContainerElement.append(p);
+    h2.innerHTML = "Du fick godkänt";
+    h2.classList.add("bra");
+    questionContainerElement.append(h2);
   } else {
-    p.innerHTML = "Du fick MVG!!";
-    p.classList.add("riktigtBra");
-    questionContainerElement.append(p);
+    h2.innerHTML = "Du fick MVG!!";
+    h2.classList.add("riktigtBra");
+    questionContainerElement.append(h2);
   }
+
+  userAnswers.forEach((answer) => {
+    const paragraph = document.createElement("p");
+
+    if (answer.answer === 1) {
+      paragraph.classList.add("correct");
+    } else {
+      paragraph.classList.add("incorrect");
+    }
+
+    paragraph.innerHTML = answer.question;
+    questionContainerElement.append(paragraph);
+  });
+
   startOver();
 }
 
@@ -137,6 +151,10 @@ function startOver() {
   //   questionContainerElement.innerHTML = "Klart";
   answerButtons.classList.add("hide");
   resultatDiv.classList.remove("hide");
+  const startOverButton = document.createElement("button");
+  startOverButton.classList.add("btn");
+  startOverButton.innerHTML = "Start over";
+  questionContainerElement.append(startOverButton);
 }
 
 // function resultat() {
@@ -281,6 +299,26 @@ const questions = [
       { text: "Hudvårdsspecialist", correct: 0 },
       { text: "Makeupartist", correct: 0 },
       { text: "Frontend utvecklare", correct: 1 },
+    ],
+  },
+  {
+    question: "Därför pluggar Willhelm till massör (välj flera alternativ)",
+    type: "checkbox",
+    answers: [
+      { text: "Han gillar att massera håriga mäns ryggar", correct: 1 },
+      { text: "Han har korviga fingrar", correct: 1 },
+      { text: "Han gillar att arbeta med kroppen", correct: 0 },
+      { text: "Massage är allt han kan", correct: 1 },
+    ],
+  },
+  {
+    question: "Det ska bli gott med en öl efter detta tycker Mackan",
+    type: "radio",
+    answers: [
+      { text: "Det stämmer 🍻", correct: 1 },
+      { text: "Inte alls", correct: 0 },
+      { text: "Mackan dricker bara gin tonics", correct: 0 },
+      { text: "Det ska bli direkt äckligt", correct: 0 },
     ],
   },
 ];

@@ -14,6 +14,7 @@ body.light {
 
 h1.light {
   color: rgb(55, 30, 30);
+  display: block∂;
 }
 
 #dark-mode.light {
@@ -189,7 +190,7 @@ input[type="radio"] {
   background-color: green;
 }
 
-.wrong {
+.incorrect {
   background-color: crimson;
 }
 
