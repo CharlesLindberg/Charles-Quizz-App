@@ -112,7 +112,7 @@ nextButton.addEventListener("click", () => {
 function showResult() {
   const resultatRubrik = document.createElement("h2");
   resultatRubrik.innerHTML = `Du fick ${correctAnswerCounter} av ${questions.length} poäng`;
-  resultatDiv.appendChild(resultatRubrik);
+  questionContainerElement.appendChild(resultatRubrik);
   let p = document.createElement("p");
   //   answerButtons.innerHTML = "";
   //   questionContainerElement.innerHTML = "KLAR! 🎉";
@@ -120,21 +120,22 @@ function showResult() {
   if (correctAnswerCounter < 5) {
     p.innerHTML = "Du fick underkänt";
     p.classList.add("underkand");
-    resultatDiv.append(p);
+    questionContainerElement.append(p);
   } else if (correctAnswerCounter >= 5 && correctAnswerCounter < 7.5) {
     p.innerHTML = "Du fick godkänt";
     p.classList.add("bra");
-    resultatDiv.append(p);
+    questionContainerElement.append(p);
   } else {
     p.innerHTML = "Du fick MVG!!";
     p.classList.add("riktigtBra");
-    resultatDiv.append(p);
+    questionContainerElement.append(p);
   }
   startOver();
 }
 
 function startOver() {
-  answerButtons.innerHTML = "KLAR 🎉";
+  //   questionContainerElement.innerHTML = "Klart";
+  answerButtons.classList.add("hide");
   resultatDiv.classList.remove("hide");
 }
 
