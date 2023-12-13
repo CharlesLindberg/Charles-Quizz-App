@@ -9,7 +9,7 @@
 
 /* -------------------- VARIABLER ------------------- */
 
-const startButton = document.getElementById("start-btn");
+const startButton = document.querySelector(".start-btn");
 startButton.addEventListener("click", startGame);
 const questionContainerElement = document.querySelector(".kort");
 const answerButtons = document.querySelector(".answer-buttons");
@@ -119,13 +119,16 @@ function showResult() {
 
   if (correctAnswerCounter < 5) {
     h2.innerHTML = "Du fick underkänt";
+    resultatRubrik.classList.add("underkand");
     h2.classList.add("underkand");
     questionContainerElement.append(h2);
   } else if (correctAnswerCounter >= 5 && correctAnswerCounter < 7.5) {
+    resultatRubrik.classList.add("bra");
     h2.innerHTML = "Du fick godkänt";
     h2.classList.add("bra");
     questionContainerElement.append(h2);
   } else {
+    resultatRubrik.classList.add("riktigtBra");
     h2.innerHTML = "Du fick MVG!!";
     h2.classList.add("riktigtBra");
     questionContainerElement.append(h2);
@@ -152,9 +155,13 @@ function startOver() {
   answerButtons.classList.add("hide");
   resultatDiv.classList.remove("hide");
   const startOverButton = document.createElement("button");
-  startOverButton.classList.add("btn");
+  startOverButton.classList.add("start-btn");
   startOverButton.innerHTML = "Start over";
+  nextButton.classList.add("hide");
   questionContainerElement.append(startOverButton);
+  startOverButton.addEventListener("click", () => {
+    location.reload();
+  });
 }
 
 // function resultat() {
@@ -282,27 +289,37 @@ const questions = [
     ],
   },
   {
+    question: "Vilken typ av skola är Ankademin?",
+    type: "radio",
+    answers: [
+      { text: "Yrkeshögskola", correct: 1 },
+      { text: "Universitet", correct: 0 },
+      { text: "Förskola", correct: 0 },
+      { text: "Hockeyskola", correct: 0 },
+    ],
+  },
+  {
     question: "Wilhelm studerar på Ankademin, vad studerar Wilhelm till?",
     type: "radio",
     answers: [
-      { text: "Massör", correct: 0 },
+      { text: "Massör", correct: 1 },
       { text: "Hudvårdsspecialist", correct: 0 },
       { text: "Makeupartist", correct: 0 },
-      { text: "Frontend utvecklare", correct: 1 },
+      { text: "Frontend utvecklare", correct: 0 },
     ],
   },
   {
-    question: "bajs bajs bajs?",
+    question: "Ankademin ligger i",
     type: "radio",
     answers: [
-      { text: "Massör (skalp)", correct: 0 },
-      { text: "Hudvårdsspecialist", correct: 0 },
-      { text: "Makeupartist", correct: 0 },
-      { text: "Frontend utvecklare", correct: 1 },
+      { text: "Malmö", correct: 0 },
+      { text: "Solna", correct: 1 },
+      { text: "Göteborg", correct: 0 },
+      { text: "Köpenhamn", correct: 0 },
     ],
   },
   {
-    question: "Därför pluggar Willhelm till massör (välj flera alternativ)",
+    question: "Varför pluggar Willhelm till massör (välj flera alternativ)",
     type: "checkbox",
     answers: [
       { text: "Han gillar att massera håriga mäns ryggar", correct: 1 },
@@ -312,6 +329,15 @@ const questions = [
     ],
   },
   {
+    question: "Vad fanns i Ankademins lokaler tidigare?",
+    type: "radio",
+    answers: [
+      { text: "SJs huvudkontor", correct: 1 },
+      { text: "Igor sport", correct: 0 },
+    ],
+  },
+
+  {
     question: "Det ska bli gott med en öl efter detta tycker Mackan",
     type: "radio",
     answers: [
@@ -319,6 +345,14 @@ const questions = [
       { text: "Inte alls", correct: 0 },
       { text: "Mackan dricker bara gin tonics", correct: 0 },
       { text: "Det ska bli direkt äckligt", correct: 0 },
+    ],
+  },
+  {
+    question: "Brandon ska med på AWn? ",
+    type: "radio",
+    answers: [
+      { text: "JAAA 🥳", correct: 1 },
+      { text: "Nej 😢", correct: 0 },
     ],
   },
 ];
