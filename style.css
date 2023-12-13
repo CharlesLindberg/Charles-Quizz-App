@@ -1,6 +1,6 @@
 body {
   background-color: rgb(42, 42, 93);
-  height: 100vh;
+  height: auto;
   width: 100vw;
   display: flex;
   flex-direction: column;

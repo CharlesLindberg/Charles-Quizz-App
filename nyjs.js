@@ -19,6 +19,7 @@ let correctAnswerCounter = 0;
 let userAnswers = [];
 const sum = (array) => array.reduce((sum, acc) => sum + acc, 0);
 const resultatDiv = document.querySelector(".resultDiv");
+const questionElement = document.querySelector(".question"); // Denna träffar h2:an
 
 // --------------- NEXT BUTTON funktionalitet ----------------------
 
@@ -107,7 +108,7 @@ nextButton.addEventListener("click", () => {
   console.log(currentQuestionAnswer);
 });
 
-/* -------------- Visa resultatet ------------------- */
+/* -------------------- VISA RESULTAT ------------------- */
 
 function showResult() {
   const resultatRubrik = document.createElement("h2");
@@ -158,6 +159,7 @@ function startOver() {
   startOverButton.classList.add("start-btn");
   startOverButton.innerHTML = "Start over";
   nextButton.classList.add("hide");
+  questionElement.classList.add("hide");
   questionContainerElement.append(startOverButton);
   startOverButton.addEventListener("click", () => {
     location.reload();
@@ -220,7 +222,6 @@ function setNextQuestion() {
 }
 
 function showQuestion(question) {
-  const questionElement = document.getElementById("question"); // Denna träffar h2:an
   questionElement.innerText = question.question;
 
   if (question.type === "radio") {
